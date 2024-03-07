@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Random Table</title>
+		<style>
+			table,
+			th,
+			td {
+				border: 1px solid black;
+			}
+
+			th,
+			td {
+				padding: 10px;
+				text-align: center;
+			}
+
+			td.orange {
+				background-color: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="randomTable">
+			<script>
+				var randomNumbers = []
+				for (var i = 0; i < 30; i++) {
+					randomNumbers.push(Math.floor(Math.random() * 100))
+				}
+
+				var table = document.getElementById('randomTable')
+				var index = 0
+
+				for (var row = 0; row < 5; row++) {
+					var newRow = table.insertRow(row)
+
+					for (var col = 0; col < 6; col++) {
+						var number = randomNumbers[index++]
+						var cell = newRow.insertCell(col)
+						cell.innerHTML = number
+
+						if (number >= 50) {
+							cell.classList.add('orange')
+						}
+					}
+				}
+
+				function foo() {
+					randomNumbers.push(Math.floor(Math.random() * 100))
+					table.innerHTML = ''
+					index = 0
+					for (var row = 0; row < Math.ceil(randomNumbers.length / 6); row++) {
+						var newRow = table.insertRow(row)
+
+						for (var col = 0; col < 6; col++) {
+							if (index < randomNumbers.length) {
+								var number = randomNumbers[index++]
+								var cell = newRow.insertCell(col)
+								cell.innerHTML = number
+
+								if (number >= 50) {
+									cell.classList.add('orange')
+								}
+							}
+						}
+					}
+				}
+			</script>
+		</table>
+
+		<button onclick="foo()">Добавить число</button>
+	</body>
+</html>
